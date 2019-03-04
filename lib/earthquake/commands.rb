@@ -140,10 +140,10 @@ Earthquake.init do
   help :update, 'update status', <<-HELP
     ⚡ :update this is my new status
     ⚡ :update[ENTER]
-        ⚡   
-       ⚡   
-         ⚡   
-        ⚡   
+        ⚡
+       ⚡
+         ⚡
+        ⚡
     ^D
   HELP
 
@@ -271,7 +271,7 @@ Earthquake.init do
   filter_stream = {
     method: "POST",
     host: "stream.twitter.com",
-    path: "/1/statuses/filter.json",
+    path: "/1.1/statuses/filter.json",
     ssl: true,
   }
 
@@ -426,9 +426,9 @@ Earthquake.init do
   help :update_profile_image, "updates profile image from local file path"
 
   command %r|^:open\s+(\d+)$|, :as => :open do |m|
-    matches = twitter.status(m[1])['retweeted_status'].nil? ? 
+    matches = twitter.status(m[1])['retweeted_status'].nil? ?
       URI.extract(twitter.status(m[1])["text"],["http", "https"]) :
-      URI.extract(twitter.status(m[1])['retweeted_status']["text"],["http", "https"]) 
+      URI.extract(twitter.status(m[1])['retweeted_status']["text"],["http", "https"])
     unless matches.empty?
       matches.each do |match_url|
         browse match_url
